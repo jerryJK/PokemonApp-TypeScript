@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getData } from '../actions';
-import { PokemonListCard, PokemonCardContent, PokemonImageWrapper, PokemonName } from '../styles';
+import { getData } from '../../actions';
+import { PokemonListCard, PokemonCardContent, PokemonImageWrapper, PokemonName } from './PokemonCard.s';
 
 class PokemonCard extends React.Component <any, any> {
 

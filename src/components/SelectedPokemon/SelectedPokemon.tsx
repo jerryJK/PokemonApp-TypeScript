@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PokemonListCard, PokemonCardContent, PokemonImageWrapper, PokemonName } from '../styles';
+import { PokemonListCard, PokemonCardContent, PokemonImageWrapper, PokemonName } from './SelectedPokemon.s';
 
 class SelectedPokemon extends React.Component<any, any> {
 

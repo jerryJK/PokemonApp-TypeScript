@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import SearchBar from './SearchBar';
-import SelectedPokemon from './SelectedPokemon';
-import PokemonList from './PokemonList';
-import { getData } from '../actions';
+import SearchBar from '../SearchBar/SearchBar';
+import SelectedPokemon from '../SelectedPokemon/SelectedPokemon';
+import PokemonList from '../PokemonList/PokemonList';
+import { getData } from '../../actions';
 import ReactLoading from 'react-loading';
-import { MyApp, Header, AppTitle, Logo, LoadingWrapper } from '../styles';
+import { MyApp, Header, AppTitle, Logo, LoadingWrapper } from './App.s';
 
 class App extends React.Component <any> {
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getData } from '../actions';
+import { getData } from '../../actions';
+
 class SearchBar extends React.Component<any, any> {
 
   constructor(props: any) {
