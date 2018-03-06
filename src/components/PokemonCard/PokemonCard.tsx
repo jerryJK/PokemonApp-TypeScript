@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName } from './PokemonCard.s';
 
-class PurePokemonCard extends React.Component <any, any> {
+class PokemonCardPure extends React.Component <any, any> {
 
   handleButtonClick(id: number) {
     // console.log(id);
@@ -29,4 +29,4 @@ class PurePokemonCard extends React.Component <any, any> {
 
 }
 
-export const PokemonCard = connect<{}, {}, any>(null, {getData})(PurePokemonCard);
+export const PokemonCard = connect<{}, {}, any>(null, {getData})(PokemonCardPure);

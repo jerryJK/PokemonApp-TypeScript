@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { Wrapper, Form, FormContentWrapper, FormInput, SubmitButton } from './SearchBar.s';
 
-class PureSearchBar extends React.Component<any, any> {
+class SearchBarPure extends React.Component<any, any> {
 
   constructor(props: any) {
     super(props);
@@ -50,4 +50,4 @@ class PureSearchBar extends React.Component<any, any> {
 
 }
 
-export const SearchBar = connect(null, {getData})(PureSearchBar);
+export const SearchBar = connect(null, {getData})(SearchBarPure);

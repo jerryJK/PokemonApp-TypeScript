@@ -31,7 +31,7 @@ export const FormInput = glamorous.input({
 
 export const SubmitButton = glamorous.button({
     width: '70px',
-    padding: '8px',
+    padding: '12px',
     marginLeft: '1px',
     color: 'white',
     backgroundColor: 'rgba(240, 42, 42, 0.85)',

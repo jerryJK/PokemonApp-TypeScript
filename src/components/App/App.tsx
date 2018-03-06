@@ -7,7 +7,7 @@ import { PokemonList } from '../PokemonList/PokemonList';
 import { getData } from '../../actions';
 import { Wrapper, Header, Title, Logo, LoadingWrapper } from './App.s';
 
-class PureApp extends React.Component <any> {
+class AppPure extends React.Component <any> {
   render() {
     const {isLoading, selectedPokemon} = this.props.state;
     return (
@@ -39,4 +39,4 @@ function mapStateToProps(state: any) {
     }
 };
 
-export const App = connect(mapStateToProps, {getData})(PureApp);
+export const App = connect(mapStateToProps, {getData})(AppPure);

@@ -4,7 +4,7 @@ import { getData } from '../../actions';
 import { PokemonCard } from '../PokemonCard/PokemonCard';
 import { Wrapper } from './PokemonList.s';
 
-class PurePokemonList extends React.Component <any, any> {
+class PokemonListPure extends React.Component <any, any> {
 
   componentDidMount() {
       this.props.getData();
@@ -30,4 +30,4 @@ function mapStateToProps(state: any) {
   return {data}
 };
 
-export const PokemonList = connect(mapStateToProps, {getData})(PurePokemonList);
+export const PokemonList = connect(mapStateToProps, {getData})(PokemonListPure);
