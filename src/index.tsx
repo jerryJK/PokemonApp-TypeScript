@@ -1,11 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/App/App';
-import './index.css';
+import thunk from 'redux-thunk';
+import { App } from './components/App/App';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import DataReducer from './reducers/DataReducer';
-import thunk from 'redux-thunk';
+import { DataReducer } from './reducers/DataReducer';
 
 const store = createStore(DataReducer, applyMiddleware(thunk));
 

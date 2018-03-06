@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export const MyApp = glamorous.div({
+export const Wrapper = glamorous.div({
     backgroundColor: 'white'
 });
 
@@ -11,7 +11,7 @@ export const Header = glamorous.div({
     textAlign: 'center'
 });
 
-export const AppTitle = glamorous.div({
+export const Title = glamorous.div({
     fontSize: '2em',
     padding: '10px',
     fontWeight: 'bold',

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getData } from '../../actions';
-import PokemonCard from '../PokemonCard/PokemonCard';
-import { PokemonsWrapper } from './PokemonList.s';
+import { PokemonCard } from '../PokemonCard/PokemonCard';
+import { Wrapper } from './PokemonList.s';
 
-class PokemonList extends React.Component <any, any> {
+class PurePokemonList extends React.Component <any, any> {
 
   componentDidMount() {
       this.props.getData();
@@ -13,15 +13,13 @@ class PokemonList extends React.Component <any, any> {
   render() {
       console.log(this.props.data)
       return (
-        <div>
-        <PokemonsWrapper>
+        <Wrapper>
           {this.props.data.map((pokemon: any, index: number) => {
               return (
                 <PokemonCard key={pokemon.name} id={index + 1} pokemon={pokemon} />
               )
           })}
-        </PokemonsWrapper>
-        </div>
+        </Wrapper>
       );
     }
 
@@ -32,4 +30,4 @@ function mapStateToProps(state: any) {
   return {data}
 };
 
-export default connect(mapStateToProps, {getData})(PokemonList);
+export const PokemonList = connect(mapStateToProps, {getData})(PurePokemonList);

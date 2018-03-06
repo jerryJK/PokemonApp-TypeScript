@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getData } from '../../actions';
+import { Wrapper, Form, FormContentWrapper, FormInput, SubmitButton } from './SearchBar.s';
 
-class SearchBar extends React.Component<any, any> {
+class PureSearchBar extends React.Component<any, any> {
 
   constructor(props: any) {
     super(props);
@@ -30,20 +31,23 @@ class SearchBar extends React.Component<any, any> {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit} className="input-group col-sm-6 mx-auto" style={{margin: '20px 0'}}>
-        <input
-          placeholder="enter pokemon name, id or click pokemon below"
-          className="form-control"
-          value={this.state.term}
-          onChange={this.onInputChange}
-        />
-        <span className="input-group-btn">
-          <button type="submit" className="btn btn-danger mx-1">Submit</button>
-        </span>
-      </form>
+      <Wrapper>
+        <Form onSubmit={this.onFormSubmit}>
+          <FormContentWrapper>
+            <FormInput
+              placeholder="enter pokemon name, id or click pokemon below"
+              value={this.state.term}
+              onChange={this.onInputChange}
+            />
+            <span>
+              <SubmitButton type="submit">Submit</SubmitButton>
+            </span>
+          </FormContentWrapper>
+        </Form>
+      </Wrapper>
     )
   }
 
 }
 
-export default connect(null, {getData})(SearchBar);
+export const SearchBar = connect(null, {getData})(PureSearchBar);

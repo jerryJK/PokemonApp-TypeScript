@@ -1,20 +1,19 @@
 import * as React from 'react';
+import  ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
-import SearchBar from '../SearchBar/SearchBar';
-import SelectedPokemon from '../SelectedPokemon/SelectedPokemon';
-import PokemonList from '../PokemonList/PokemonList';
+import { SearchBar } from  '../SearchBar/SearchBar';
+import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
+import { PokemonList } from '../PokemonList/PokemonList';
 import { getData } from '../../actions';
-import ReactLoading from 'react-loading';
-import { MyApp, Header, AppTitle, Logo, LoadingWrapper } from './App.s';
+import { Wrapper, Header, Title, Logo, LoadingWrapper } from './App.s';
 
-class App extends React.Component <any> {
-
+class PureApp extends React.Component <any> {
   render() {
     const {isLoading, selectedPokemon} = this.props.state;
     return (
-      <MyApp>
+      <Wrapper>
           <Header>
-            <AppTitle>Get Your Pokemon</AppTitle>
+            <Title>Get Your Pokemon</Title>
             <Logo src={`/img/pokemon.png`} alt="logo" />
           </Header>
           <SearchBar />
@@ -29,7 +28,7 @@ class App extends React.Component <any> {
               }
           </div>
           <PokemonList />
-      </MyApp>
+      </Wrapper>
     );
   }
 }
@@ -40,4 +39,4 @@ function mapStateToProps(state: any) {
     }
 };
 
-export default connect(mapStateToProps, {getData})(App);
+export const App = connect(mapStateToProps, {getData})(PureApp);

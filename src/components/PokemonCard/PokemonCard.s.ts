@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 
-export const PokemonListCard = glamorous.div({
+export const Wrapper = glamorous.div({
     flexBasis: '20%',
     justifyContent: 'center',
     boxSizing: 'border-box',
