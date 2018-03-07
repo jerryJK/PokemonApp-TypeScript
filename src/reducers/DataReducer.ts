@@ -7,7 +7,7 @@ const initialState = {
                       selectedPokemon: null
                      };
 
-export default (state: any = initialState, action: any) => {
+export const DataReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
         case GET_DATA_REQUESTED:
             return { ...state, isLoading: true };

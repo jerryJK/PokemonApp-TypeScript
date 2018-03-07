@@ -1,27 +1,27 @@
 import * as React from 'react';
-import { PokemonListCard, PokemonCardContent, PokemonImageWrapper, PokemonName } from '../styles';
+import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonSkills } from './SelectedPokemon.s';
 
-class SelectedPokemon extends React.Component<any, any> {
+class SelectedPokemonPure extends React.Component<any, any> {
 
   render() {
     const {name, id, height, weight} = this.props.pokemon;
 
     return (
-              <PokemonListCard className="col-sm-8 mx-auto">
+              <Wrapper>
                   <PokemonCardContent>
                     <PokemonImageWrapper>
                       <img src={`/img/${id}.png`} />
                     </PokemonImageWrapper>
                     <PokemonName>
-                      <h3>{name}</h3>
+                      {name}
                     </PokemonName>
-                    <div className="text-center">
+                    <PokemonSkills>
                       {`id: ${id} height: ${height} weight: ${weight}`}
-                    </div>
+                    </PokemonSkills>
                   </PokemonCardContent>
-              </PokemonListCard>
+              </Wrapper>
     )
-    }
+  }
 }
 
-export default SelectedPokemon;
+export const SelectedPokemon = SelectedPokemonPure;

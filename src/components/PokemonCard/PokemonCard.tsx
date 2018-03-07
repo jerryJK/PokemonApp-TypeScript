@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getData } from '../actions';
-import { PokemonListCard, PokemonCardContent, PokemonImageWrapper, PokemonName } from '../styles';
+import { getData } from '../../actions';
+import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName } from './PokemonCard.s';
 
-class PokemonCard extends React.Component <any, any> {
+class PokemonCardPure extends React.Component <any, any> {
 
   handleButtonClick(id: number) {
     // console.log(id);
@@ -14,7 +14,7 @@ class PokemonCard extends React.Component <any, any> {
   render() {
     const {pokemon, id} = this.props;
     return (
-            <PokemonListCard onClick={() => this.handleButtonClick(id)}>
+            <Wrapper onClick={() => this.handleButtonClick(id)}>
                 <PokemonCardContent>
                   <PokemonImageWrapper>
                       <img src={`/img/${id}.png`} />
@@ -23,10 +23,10 @@ class PokemonCard extends React.Component <any, any> {
                       {pokemon.name}
                   </PokemonName>
                 </PokemonCardContent>
-            </PokemonListCard>
+            </Wrapper>
     )
     }
 
 }
 
-export default connect<{}, {}, any>(null, {getData})(PokemonCard);
+export const PokemonCard = connect<{}, {}, any>(null, {getData})(PokemonCardPure);
