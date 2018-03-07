@@ -4,17 +4,27 @@ import { getData } from '../../actions';
 import { PokemonCard } from '../PokemonCard/PokemonCard';
 import { Wrapper } from './PokemonList.s';
 
-class PokemonListPure extends React.Component <any, any> {
+type StateProps = {
+  data: object[]
+}
+
+type DispatchProps = {
+  getData: () => object
+}
+
+type Props = StateProps & DispatchProps;
+
+class PokemonListPure extends React.Component <Props> {
 
   componentDidMount() {
       this.props.getData();
   }
 
   render() {
-      console.log(this.props.data)
+      console.log('data' + this.props.data)
       return (
         <Wrapper>
-          {this.props.data.map((pokemon: any, index: number) => {
+          {this.props.data.map((pokemon: {name: string}, index: number) => {
               return (
                 <PokemonCard key={pokemon.name} id={index + 1} pokemon={pokemon} />
               )

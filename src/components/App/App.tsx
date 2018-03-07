@@ -7,7 +7,28 @@ import { PokemonList } from '../PokemonList/PokemonList';
 import { getData } from '../../actions';
 import { Wrapper, Header, Title, Logo, LoadingWrapper } from './App.s';
 
-class AppPure extends React.Component <any> {
+type StateProps = {
+  state: {
+    isLoading: boolean,
+    isError: boolean,
+    data: object[],
+    selectedPokemon: {
+      name: string,
+      id: number,
+      height: number,
+      weight: number
+    }
+  }
+}
+
+type DispatchProps = {
+  getData: (id: number) => object
+}
+
+type Props = StateProps & DispatchProps;
+
+class AppPure extends React.Component <Props> {
+
   render() {
     const {isLoading, selectedPokemon} = this.props.state;
     return (
@@ -33,7 +54,7 @@ class AppPure extends React.Component <any> {
   }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: object) {
     return {
         state
     }

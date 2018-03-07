@@ -1,15 +1,14 @@
 import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON } from '../constants';
 import * as fetch from 'isomorphic-fetch';
 
-export function getPokemon(data: number) {
-  console.log(data);
+export function getPokemon(data: object) {
   return {
     type: GET_POKEMON,
     payload: data
   };
 }
 
-export function getDataDone(data: any) {
+export function getDataDone(data: object[]) {
   return {
     type: GET_DATA_DONE,
     payload: data
@@ -22,14 +21,14 @@ export function getDataRequested() {
   };
 }
 
-export function getDataFailed(error: any) {
+export function getDataFailed(error: object) {
   return {
     type: GET_DATA_FAILED,
     payload: error
   };
 }
 
-export function getData(id: number): any {
+export function getData(id: number): object {
   return (dispatch: any) => {
     if (id) {
         dispatch(getDataRequested());

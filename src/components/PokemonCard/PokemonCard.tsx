@@ -3,10 +3,22 @@ import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName } from './PokemonCard.s';
 
-class PokemonCardPure extends React.Component <any, any> {
+type StateProps = {
+  pokemon: {
+    name: string
+  },
+  id: number
+}
+
+type DispatchProps = {
+  getData: (id: number) => object
+}
+
+type Props = StateProps & DispatchProps;
+
+class PokemonCardPure extends React.Component <Props> {
 
   handleButtonClick(id: number) {
-    // console.log(id);
     const {getData} = this.props;
     getData(id);
   }

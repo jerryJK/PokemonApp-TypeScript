@@ -1,7 +1,16 @@
 import * as React from 'react';
 import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonSkills } from './SelectedPokemon.s';
 
-class SelectedPokemonPure extends React.Component<any, any> {
+type Props = {
+  pokemon: {
+    name: string,
+    id: number,
+    height: number,
+    weight: number
+  }
+}
+
+class SelectedPokemonPure extends React.Component<Props> {
 
   render() {
     const {name, id, height, weight} = this.props.pokemon;
