@@ -6,12 +6,11 @@ import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
 import { PokemonList } from '../PokemonList/PokemonList';
 import { getData } from '../../actions';
 import { Wrapper, Header, Title, Logo, LoadingWrapper } from './App.s';
-import { SelectedPokemonType }  from '../../model/SelectedPokemon';
-import { StateType }  from '../../model/State';
+import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
   isLoading: boolean,
-  selectedPokemon: SelectedPokemonType
+  selectedPokemon: Pokemon
 }
 
 type DispatchProps = {
@@ -47,7 +46,7 @@ class AppPure extends React.Component <Props> {
   }
 }
 
-function mapStateToProps(state: StateType) {
+function mapStateToProps(state: {pokemon: {isLoading: boolean, selectedPokemon: Pokemon }}) {
     const { isLoading, selectedPokemon } = state.pokemon;
     return {
         isLoading,

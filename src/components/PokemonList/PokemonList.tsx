@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { PokemonCard } from '../PokemonCard/PokemonCard';
 import { Wrapper } from './PokemonList.s';
-import { StateType }  from '../../model/State';
+import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  pokemonList: object[]
+  pokemonList: Array<Pokemon>
 }
 
 type DispatchProps = {
@@ -35,7 +35,7 @@ class PokemonListPure extends React.Component <Props> {
 
 }
 
-function mapStateToProps(state: StateType) {
+function mapStateToProps(state: {pokemon: { pokemonList: Array<Pokemon> }}) {
   const { pokemonList } = state.pokemon;
   return {
     pokemonList

@@ -1,4 +1,4 @@
-export type SelectedPokemonType = Readonly<{
+export type Pokemon = Readonly<{
   name: string,
   id: number,
   height: number,
