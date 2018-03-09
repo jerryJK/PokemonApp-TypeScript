@@ -3,26 +3,34 @@ import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { Wrapper, Form, FormContentWrapper, FormInput, SubmitButton } from './SearchBar.s';
 
-class SearchBarPure extends React.Component<any, any> {
+type Props = {
+  getData: (id: number) => object
+}
 
-  constructor(props: any) {
+type State = {
+  term: string
+}
+
+class SearchBarPure extends React.Component<Props, State> {
+
+  constructor(props: Props) {
     super(props);
     this.state = {
       term: ''
     }
   }
 
-  onInputChange = (event: any) => {
+  onInputChange = (event: any): void => {
     // console.log(event.target.value);
       this.setState({
         term: event.target.value
       })
   }
 
-  onFormSubmit = (event: any) => {
+  onFormSubmit = (event: any): void => {
     event.preventDefault();
     const {getData} = this.props;
-    getData(this.state.term);
+    getData(Number(this.state.term));
     this.setState({
       term: ''
     })

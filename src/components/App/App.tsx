@@ -6,10 +6,23 @@ import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
 import { PokemonList } from '../PokemonList/PokemonList';
 import { getData } from '../../actions';
 import { Wrapper, Header, Title, Logo, LoadingWrapper } from './App.s';
+import { Pokemon }  from '../../model/Pokemon';
 
-class AppPure extends React.Component <any> {
+type StateProps = {
+  isLoading: boolean,
+  selectedPokemon: Pokemon
+}
+
+type DispatchProps = {
+  getData: (id: number) => object
+}
+
+type Props = StateProps & DispatchProps;
+
+class AppPure extends React.Component <Props> {
+
   render() {
-    const {isLoading, selectedPokemon} = this.props.state;
+    const {isLoading, selectedPokemon} = this.props;
     return (
       <Wrapper>
           <Header>
@@ -24,7 +37,7 @@ class AppPure extends React.Component <any> {
           }
           <div>
               {selectedPokemon &&
-                <SelectedPokemon pokemon={selectedPokemon} />
+                <SelectedPokemon selectedPokemon={selectedPokemon} />
               }
           </div>
           <PokemonList />
@@ -33,9 +46,11 @@ class AppPure extends React.Component <any> {
   }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: {pokemon: {isLoading: boolean, selectedPokemon: Pokemon }}) {
+    const { isLoading, selectedPokemon } = state.pokemon;
     return {
-        state
+        isLoading,
+        selectedPokemon
     }
 };
 

@@ -3,18 +3,28 @@ import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { PokemonCard } from '../PokemonCard/PokemonCard';
 import { Wrapper } from './PokemonList.s';
+import { Pokemon }  from '../../model/Pokemon';
 
-class PokemonListPure extends React.Component <any, any> {
+type StateProps = {
+  pokemonList: Array<Pokemon>
+}
+
+type DispatchProps = {
+  getData: () => object
+}
+
+type Props = StateProps & DispatchProps;
+
+class PokemonListPure extends React.Component <Props> {
 
   componentDidMount() {
       this.props.getData();
   }
 
   render() {
-      console.log(this.props.data)
       return (
         <Wrapper>
-          {this.props.data.map((pokemon: any, index: number) => {
+          {this.props.pokemonList.map((pokemon: {name: string}, index: number) => {
               return (
                 <PokemonCard key={pokemon.name} id={index + 1} pokemon={pokemon} />
               )
@@ -25,9 +35,11 @@ class PokemonListPure extends React.Component <any, any> {
 
 }
 
-function mapStateToProps(state: any) {
-  const {data} = state;
-  return {data}
+function mapStateToProps(state: {pokemon: { pokemonList: Array<Pokemon> }}) {
+  const { pokemonList } = state.pokemon;
+  return {
+    pokemonList
+  }
 };
 
 export const PokemonList = connect(mapStateToProps, {getData})(PokemonListPure);
