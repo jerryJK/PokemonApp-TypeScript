@@ -1,14 +1,14 @@
 import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON } from '../constants';
-// import { Pokemon } from '../model/Pokemon';
+import { Pokemon } from '../model/Pokemon';
 
-// type State = {
-//   pokemon: {
-//     isLoading: boolean,
-//     isError: boolean,
-//     pokemonList: Array<Pokemon> | object[],
-//     selectedPokemon: Pokemon | null
-//   }
-// }
+type State = {
+  pokemon: {
+    isLoading: boolean,
+    isError: boolean,
+    pokemonList: Array<Pokemon>,
+    selectedPokemon: Pokemon | null
+  }
+}
 
 type ActionGetDataDone = {
     type: 'GET_DATA_DONE',
@@ -42,7 +42,7 @@ const initialState = {
                       }
                      };
 
-export const DataReducer = (state: any = initialState, action: Actions ) => {
+export const DataReducer = (state: State = initialState, action: Actions ) => {
     switch (action.type) {
         case GET_DATA_REQUESTED:
             return { ...state, pokemon: { ...state.pokemon, isLoading: true }};
