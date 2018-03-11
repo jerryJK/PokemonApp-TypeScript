@@ -1,37 +1,51 @@
 import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON } from '../constants';
 import { DataApi } from '../api/DataApi';
-// import * as fetch from 'isomorphic-fetch';
+import { createAction } from 'redux-actions';
 
-export function getPokemon(data: object) {
-  return {
-    type: GET_POKEMON,
-    payload: data
-  };
-}
+export const getPokemon = createAction(GET_POKEMON,
+    payload => payload
+);
 
-export function getDataDone(data: object[]) {
-  return {
-    type: GET_DATA_DONE,
-    payload: data
-  };
-}
+export const getDataDone = createAction(GET_DATA_DONE,
+    payload => payload
+);
 
-export function getDataRequested() {
-  return {
-    type: GET_DATA_REQUESTED
-  };
-}
+export const getDataRequested = createAction(GET_DATA_REQUESTED);
 
-export function getDataFailed(error: object) {
-  return {
-    type: GET_DATA_FAILED,
-    payload: error
-  };
-}
+export const getDataFailed = createAction(GET_DATA_FAILED,
+    payload => payload
+);
+
+// export function getPokemon(data: object) {
+//   return {
+//     type: GET_POKEMON,
+//     payload: data
+//   };
+// }
+//
+// export function getDataDone(data: object[]) {
+//   return {
+//     type: GET_DATA_DONE,
+//     payload: data
+//   };
+// }
+//
+// export function getDataRequested() {
+//   return {
+//     type: GET_DATA_REQUESTED
+//   };
+// }
+//
+// export function getDataFailed(error: object) {
+//   return {
+//     type: GET_DATA_FAILED,
+//     payload: error
+//   };
+// }
 
 export function getData(id: number): object {
   return (dispatch: any) => {
-    let api = new DataApi();
+    const api = new DataApi();
     if (id) {
         dispatch(getDataRequested());
           api.getPokemon(id)
@@ -52,6 +66,7 @@ export function getData(id: number): object {
           dispatch(getDataDone(data));
           })
           .catch(error => {
+            // set state for error
             dispatch(getDataFailed(error));
           })
     }
