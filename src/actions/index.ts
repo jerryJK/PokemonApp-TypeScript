@@ -1,5 +1,6 @@
 import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON } from '../constants';
-import * as fetch from 'isomorphic-fetch';
+import { DataApi } from '../api/DataApi';
+// import * as fetch from 'isomorphic-fetch';
 
 export function getPokemon(data: object) {
   return {
@@ -30,10 +31,10 @@ export function getDataFailed(error: object) {
 
 export function getData(id: number): object {
   return (dispatch: any) => {
+    let api = new DataApi();
     if (id) {
         dispatch(getDataRequested());
-        fetch(`http://pokeapi.co/api/v2/pokemon/${id}`)
-          .then(res => res.json())
+          api.getPokemon(id)
           .then(data => {
             // set state for success
             dispatch(getPokemon(data));
@@ -44,8 +45,7 @@ export function getData(id: number): object {
           })
     } else {
         dispatch(getDataRequested());
-        fetch('http://pokeapi.co/api/v2/pokemon?limit=100')
-          .then(res => res.json())
+          api.getPokemonAll()
           .then(data => {
           console.log(data);
           // set state for success
