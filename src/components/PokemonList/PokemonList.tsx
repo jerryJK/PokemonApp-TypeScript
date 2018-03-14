@@ -22,9 +22,10 @@ class PokemonListPure extends React.Component <Props> {
   }
 
   render() {
+      const { pokemonList } = this.props;
       return (
         <Wrapper>
-          {this.props.pokemonList.map((pokemon: {name: string}, index: number) => {
+          {pokemonList.map((pokemon: {name: string}, index: number) => {
               return (
                 <PokemonCard key={pokemon.name} id={index + 1} pokemon={pokemon} />
               )

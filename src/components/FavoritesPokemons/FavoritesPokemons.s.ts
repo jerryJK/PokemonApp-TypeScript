@@ -6,7 +6,7 @@ export const Wrapper = glamorous.div({
 });
 
 export const Header = glamorous.div({
-    backgroundColor: 'rgb(34, 142, 230)',
+    backgroundColor: 'rgb(200, 56, 65)',
     padding: '10px',
     color: 'white',
     textAlign: 'center'
@@ -22,12 +22,6 @@ export const Title = glamorous.div({
 export const Logo = glamorous.img({
     height: 150,
     width: 150
-});
-
-export const LoadingWrapper = glamorous.div({
-    position: 'absolute',
-    left: '50%',
-    transform: 'translate(-50%, 0)'
 });
 
 export const Nav = glamorous.div({

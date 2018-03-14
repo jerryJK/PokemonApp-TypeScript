@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getData } from '../../actions';
-import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName } from './PokemonCard.s';
+import { Pokemon }  from '../../model/Pokemon';
+import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonStarWrapper } from './PokemonCard.s';
 
 type StateProps = {
   pokemon: {
     name: string
   },
-  id: number
+  id: number,
+  favorites: Array<Pokemon>
 }
 
 type DispatchProps = {
@@ -23,8 +25,22 @@ class PokemonCardPure extends React.Component <Props> {
     getData(id);
   }
 
+  checkFavorite = (id) => {
+    const { favorites } = this.props;
+    let idArray = [];
+    favorites.forEach(elem => {
+      idArray.push(elem.id);
+    })
+    if (idArray.indexOf(id) !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     const {pokemon, id} = this.props;
+    let isFavorite = this.checkFavorite(id);
     return (
             <Wrapper onClick={() => this.handleButtonClick(id)}>
                 <PokemonCardContent>
@@ -34,6 +50,9 @@ class PokemonCardPure extends React.Component <Props> {
                   <PokemonName>
                       {pokemon.name}
                   </PokemonName>
+                  <PokemonStarWrapper>
+                    {isFavorite && <img src={`/img/star-fav.png`} />}
+                  </PokemonStarWrapper>
                 </PokemonCardContent>
             </Wrapper>
     )
@@ -41,4 +60,11 @@ class PokemonCardPure extends React.Component <Props> {
 
 }
 
-export const PokemonCard = connect<{}, {}, any>(null, {getData})(PokemonCardPure);
+function mapStateToProps(state: {pokemon: { favorites: Array<Pokemon> }}) {
+  const { favorites } = state.pokemon;
+  return {
+    favorites
+  }
+};
+
+export const PokemonCard = connect(mapStateToProps, {getData})(PokemonCardPure);

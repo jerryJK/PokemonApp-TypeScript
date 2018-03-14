@@ -1,11 +1,12 @@
 import * as React from 'react';
 import  ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
 import { SearchBar } from  '../SearchBar/SearchBar';
 import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
 import { PokemonList } from '../PokemonList/PokemonList';
 import { getData } from '../../actions';
-import { Wrapper, Header, Title, Logo, LoadingWrapper } from './App.s';
+import { Wrapper, Header, Title, Logo, LoadingWrapper, Nav, NavItemFavorites, NavLink } from './App.s';
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
@@ -22,12 +23,19 @@ type Props = StateProps & DispatchProps;
 class AppPure extends React.Component <Props> {
 
   render() {
-    const {isLoading, selectedPokemon} = this.props;
+    const {isLoading, selectedPokemon } = this.props;
+
     return (
       <Wrapper>
           <Header>
             <Title>Get Your Pokemon</Title>
             <Logo src={`/img/pokemon.png`} alt="logo" />
+            <Nav>
+              <NavItemFavorites>
+                <img src={`/img/star-fav.png`} />
+                <NavLink to={`/favorites`}>Favorites pokemons</NavLink>
+              </NavItemFavorites>
+            </Nav>
           </Header>
           <SearchBar />
           {isLoading &&

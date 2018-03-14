@@ -8,9 +8,9 @@ import { DataReducer } from './reducers/DataReducer';
 
 const store = createStore(DataReducer, applyMiddleware(thunk));
 
-ReactDOM.render(
-    <Provider store={store}> 
-      <App/>
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
     </Provider>,
     document.getElementById('root')
-  )
+  );
