@@ -1,4 +1,4 @@
-import { getDataDone, getDataRequested, getDataFailed, getPokemon } from '../actions';
+import { getDataDone, getDataRequested, getDataFailed, getPokemon, addToFavorites, deleteFavPokemon } from '../actions';
 import { Pokemon } from '../model/Pokemon';
 import { handleActions } from 'redux-actions';
 
@@ -7,7 +7,8 @@ type State = {
     isLoading: boolean,
     isError: boolean,
     pokemonList: Array<Pokemon>,
-    selectedPokemon: Pokemon | null
+    selectedPokemon: Pokemon | null,
+    favorites: Array<Pokemon>
   }
 }
 
@@ -32,14 +33,34 @@ type ActionGetPokemon = {
     payload: object
 }
 
+type ActionAddToFavorites = {
+    type: 'ADD_TO_FAVORITES',
+    payload: Pokemon
+}
+
+type ActionDeleteFavPokemon = {
+    type: 'DELETE_FAV_POKEMON',
+    payload: number
+}
+
+const deletePokemonFav = (favorites, id) => {
+    let newFavorites = favorites.filter(elem => {
+        return (
+            elem.id !== id
+        )
+    });
+    return newFavorites;
+};
+
 const initialState = {
-                      pokemon: {
-                        isLoading: false,
-                        isError: false,
-                        pokemonList: [],
-                        selectedPokemon: null
-                      }
-                     };
+    pokemon: {
+        isLoading: false,
+        isError: false,
+        pokemonList: [],
+        selectedPokemon: null,
+        favorites: []
+    }
+};
 
 export const DataReducer = handleActions ({
   [getDataDone as any](state: State, payload: ActionGetDataDone) {
@@ -53,6 +74,12 @@ export const DataReducer = handleActions ({
   },
   [getPokemon as any](state: State, payload: ActionGetPokemon) {
     return { ...state, pokemon: { ...state.pokemon, selectedPokemon: payload.payload , isLoading: false}};
+  },
+  [addToFavorites as any](state: State, payload: ActionAddToFavorites) {
+    return { ...state, pokemon: { ...state.pokemon, favorites: [ ...state.pokemon.favorites, payload.payload]} };
+  },
+  [deleteFavPokemon as any](state: State, payload: ActionDeleteFavPokemon) {
+    return { ...state, pokemon: { ...state.pokemon, favorites: deletePokemonFav(state.pokemon.favorites, payload.payload)} };
   }
 }, initialState);
 

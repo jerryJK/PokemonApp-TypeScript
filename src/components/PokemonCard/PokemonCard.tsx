@@ -1,30 +1,47 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { getData } from '../../actions';
-import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName } from './PokemonCard.s';
+import { Pokemon }  from '../../model/Pokemon';
+import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonStarWrapper } from './PokemonCard.s';
 
 type StateProps = {
   pokemon: {
-    name: string
-  },
-  id: number
+    favorites: Array<Pokemon>
+  }
 }
 
 type DispatchProps = {
   getData: (id: number) => object
 }
 
-type Props = StateProps & DispatchProps;
+type ParentProps = {
+  pokemonParent: {
+    name: string
+  },
+  id: number
+}
+
+type Props = StateProps & DispatchProps & ParentProps;
 
 class PokemonCardPure extends React.Component <Props> {
 
   handleButtonClick(id: number) {
-    const {getData} = this.props;
-    getData(id);
+    this.props.getData(id);
+  }
+
+  checkFavorite = (id: number) => {
+    const favorites  = this.props.pokemon.favorites;
+    let idArray = [];
+    favorites.forEach(elem => {
+      idArray.push(elem.id);
+    })
+    return idArray.indexOf(id) !== -1;
   }
 
   render() {
-    const {pokemon, id} = this.props;
+    const pokemonParent = this.props.pokemonParent;
+    const id = this.props.id;
+    const isFavorite = this.checkFavorite(id);
     return (
             <Wrapper onClick={() => this.handleButtonClick(id)}>
                 <PokemonCardContent>
@@ -32,13 +49,23 @@ class PokemonCardPure extends React.Component <Props> {
                       <img src={`/img/${id}.png`} />
                   </PokemonImageWrapper>
                   <PokemonName>
-                      {pokemon.name}
+                      {pokemonParent.name}
                   </PokemonName>
+                  <PokemonStarWrapper>
+                    {isFavorite && <img src={`/img/star-fav.png`} />}
+                  </PokemonStarWrapper>
                 </PokemonCardContent>
             </Wrapper>
-    )
+          )
     }
 
 }
 
-export const PokemonCard = connect<{}, {}, any>(null, {getData})(PokemonCardPure);
+function mapStateToProps(state: StateProps) {
+  const pokemon = state.pokemon;
+  return {
+    pokemon
+  }
+};
+
+export const PokemonCard = connect(mapStateToProps, {getData})(PokemonCardPure);

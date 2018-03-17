@@ -5,12 +5,14 @@ import { SearchBar } from  '../SearchBar/SearchBar';
 import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
 import { PokemonList } from '../PokemonList/PokemonList';
 import { getData } from '../../actions';
-import { Wrapper, Header, Title, Logo, LoadingWrapper } from './App.s';
+import { Wrapper, Header, Title, Logo, LoadingWrapper, Nav, NavItemFavorites, NavLink } from './App.s';
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  isLoading: boolean,
-  selectedPokemon: Pokemon
+  pokemon: {
+    isLoading: boolean,
+    selectedPokemon: Pokemon
+  }
 }
 
 type DispatchProps = {
@@ -22,12 +24,20 @@ type Props = StateProps & DispatchProps;
 class AppPure extends React.Component <Props> {
 
   render() {
-    const {isLoading, selectedPokemon} = this.props;
+    const isLoading = this.props.pokemon.isLoading;
+    const selectedPokemon = this.props.pokemon.selectedPokemon
+
     return (
       <Wrapper>
           <Header>
             <Title>Get Your Pokemon</Title>
             <Logo src={`/img/pokemon.png`} alt="logo" />
+            <Nav>
+              <NavItemFavorites>
+                <img src={`/img/star-fav.png`} />
+                <NavLink to={`/favorites`}>Favorites pokemons</NavLink>
+              </NavItemFavorites>
+            </Nav>
           </Header>
           <SearchBar />
           {isLoading &&
@@ -46,11 +56,10 @@ class AppPure extends React.Component <Props> {
   }
 }
 
-function mapStateToProps(state: {pokemon: {isLoading: boolean, selectedPokemon: Pokemon }}) {
-    const { isLoading, selectedPokemon } = state.pokemon;
+function mapStateToProps(state: StateProps) {
+    const pokemon = state.pokemon;
     return {
-        isLoading,
-        selectedPokemon
+        pokemon
     }
 };
 

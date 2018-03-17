@@ -1,4 +1,4 @@
-import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON } from '../constants';
+import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON, ADD_TO_FAVORITES, DELETE_FAV_POKEMON } from '../constants';
 import { DataApi } from '../api/DataApi';
 import { createAction } from 'redux-actions';
 
@@ -13,6 +13,14 @@ export const getDataDone = createAction(GET_DATA_DONE,
 export const getDataRequested = createAction(GET_DATA_REQUESTED);
 
 export const getDataFailed = createAction(GET_DATA_FAILED,
+    payload => payload
+);
+
+export const addToFavorites = createAction(ADD_TO_FAVORITES,
+    payload => payload
+);
+
+export const deleteFavPokemon = createAction(DELETE_FAV_POKEMON,
     payload => payload
 );
 
