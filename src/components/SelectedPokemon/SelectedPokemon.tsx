@@ -5,45 +5,48 @@ import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonS
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  selectedPokemon: Pokemon,
-  favorites: Array<Pokemon>
-
-}
-
-type DispatchProps = {
-  addToFavorites: (obj: object) => {
-      type: 'ADD_TO_FAVORITES',
-      payload: Pokemon
+  pokemon: {
+    favorites: Array<Pokemon>
   }
 }
 
-type Props = StateProps & DispatchProps;
+type DispatchProps = {
+  addToFavorites: (obj: Pokemon) => {
+    type: 'ADD_TO_FAVORITES',
+    payload: Pokemon
+  }
+}
+
+type ParentProps = {
+  selectedPokemon: Pokemon
+}
+
+type Props = StateProps & DispatchProps & ParentProps;
 
 class SelectedPokemonPure extends React.Component<Props> {
 
   handleStarClick(id: number, name: string, height: number, weight: number) {
-    const {addToFavorites} = this.props;
+    const addToFavorites = this.props.addToFavorites;
     if (!this.checkFavorite(id)) {
       addToFavorites({name, id, height, weight});
     }
   }
 
   checkFavorite = (id) => {
-    const { favorites } = this.props;
+    const favorites = this.props.pokemon.favorites;
     let idArray = [];
     favorites.forEach(elem => {
       idArray.push(elem.id);
     })
-    if (idArray.indexOf(id) !== -1) {
-      return true;
-    } else {
-      return false;
-    }
+    return idArray.indexOf(id) !== -1;
   }
 
   render() {
-    const {name, id, height, weight} = this.props.selectedPokemon;
-    let isFavorite = this.checkFavorite(id);
+    const name = this.props.selectedPokemon.name;
+    const id = this.props.selectedPokemon.id;
+    const height = this.props.selectedPokemon.height;
+    const weight = this.props.selectedPokemon.weight;
+    const isFavorite = this.checkFavorite(id);
 
     return (
               <Wrapper>
@@ -58,7 +61,7 @@ class SelectedPokemonPure extends React.Component<Props> {
                       {`id: ${id} height: ${height} weight: ${weight}`}
                     </PokemonSkills>
                     <PokemonStarWrapper onClick={() => this.handleStarClick(id, name, height, weight)}>
-                      <Image src={(isFavorite) ? `/img/star-fav.png` : `/img/star-empty.png`} />
+                      <Image isFavorite={isFavorite} />
                     </PokemonStarWrapper>
                   </PokemonCardContent>
               </Wrapper>
@@ -66,10 +69,10 @@ class SelectedPokemonPure extends React.Component<Props> {
   }
 }
 
-function mapStateToProps(state: {pokemon: { favorites: Array<Pokemon> }}) {
-  const { favorites } = state.pokemon;
+function mapStateToProps(state: StateProps) {
+  const pokemon = state.pokemon;
   return {
-    favorites
+    pokemon
   }
 };
 

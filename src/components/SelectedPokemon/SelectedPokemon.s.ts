@@ -31,6 +31,14 @@ export const PokemonStarWrapper = glamorous.div({
     justifyContent: 'flex-end'
 });
 
-export const Image = glamorous.img({
-    cursor: 'pointer'
-});
+const ImageFactory = glamorous('div', {withProps: {isFavorite: false}})
+
+export const Image = ImageFactory(({isFavorite}) => (
+  {
+   background: 'url(/img/star-empty.png) no-repeat',
+   backgroundImage: isFavorite && 'url(/img/star-fav.png)',
+   width: 25,
+   height: 25,
+   cursor: 'pointer'
+  }
+))

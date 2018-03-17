@@ -29,7 +29,7 @@ class SearchBarPure extends React.Component<Props, State> {
 
   onFormSubmit = (event: any): void => {
     event.preventDefault();
-    const {getData} = this.props;
+    const getData = this.props.getData;
     getData(Number(this.state.term));
     this.setState({
       term: ''

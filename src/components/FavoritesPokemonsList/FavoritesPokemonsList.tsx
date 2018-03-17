@@ -6,7 +6,9 @@ import { Wrapper } from './FavoritesPokemonsList.s';
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  favorites: Array<Pokemon>
+  pokemon: {
+    favorites: Array<Pokemon>
+  }
 }
 
 type Props = StateProps;
@@ -14,7 +16,7 @@ type Props = StateProps;
 class FavoritesPokemonsListPure extends React.Component <Props> {
 
   render() {
-      const { favorites } = this.props;
+      const favorites = this.props.pokemon.favorites;
       return (
         <Wrapper>
           {favorites.map((pokemon: {name: string, id: number}, index: number) => {
@@ -28,11 +30,10 @@ class FavoritesPokemonsListPure extends React.Component <Props> {
 
 }
 
-function mapStateToProps(state: {pokemon: { favorites: Array<Pokemon> }}) {
-  console.log(state);
-  const { favorites } = state.pokemon;
+function mapStateToProps(state: StateProps) {
+  const pokemon = state.pokemon;
   return {
-    favorites
+    pokemon
   }
 };
 

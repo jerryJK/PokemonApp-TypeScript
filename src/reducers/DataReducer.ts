@@ -35,7 +35,7 @@ type ActionGetPokemon = {
 
 type ActionAddToFavorites = {
     type: 'ADD_TO_FAVORITES',
-    payload: object
+    payload: Pokemon
 }
 
 type ActionDeleteFavPokemon = {
@@ -44,7 +44,7 @@ type ActionDeleteFavPokemon = {
 }
 
 const deletePokemonFav = (favorites, id) => {
-    let newFavorites =  favorites.filter(elem => {
+    let newFavorites = favorites.filter(elem => {
         return (
             elem.id !== id
         )
@@ -53,14 +53,14 @@ const deletePokemonFav = (favorites, id) => {
 };
 
 const initialState = {
-                      pokemon: {
-                        isLoading: false,
-                        isError: false,
-                        pokemonList: [],
-                        selectedPokemon: null,
-                        favorites: []
-                      }
-                     };
+    pokemon: {
+        isLoading: false,
+        isError: false,
+        pokemonList: [],
+        selectedPokemon: null,
+        favorites: []
+    }
+};
 
 export const DataReducer = handleActions ({
   [getDataDone as any](state: State, payload: ActionGetDataDone) {
@@ -79,7 +79,6 @@ export const DataReducer = handleActions ({
     return { ...state, pokemon: { ...state.pokemon, favorites: [ ...state.pokemon.favorites, payload.payload]} };
   },
   [deleteFavPokemon as any](state: State, payload: ActionDeleteFavPokemon) {
-    console.log(payload.payload);
     return { ...state, pokemon: { ...state.pokemon, favorites: deletePokemonFav(state.pokemon.favorites, payload.payload)} };
   }
 }, initialState);

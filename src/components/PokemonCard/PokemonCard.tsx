@@ -6,41 +6,42 @@ import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonS
 
 type StateProps = {
   pokemon: {
-    name: string
-  },
-  id: number,
-  favorites: Array<Pokemon>
+    favorites: Array<Pokemon>
+  }
 }
 
 type DispatchProps = {
   getData: (id: number) => object
 }
 
-type Props = StateProps & DispatchProps;
+type ParentProps = {
+  pokemonParent: {
+    name: string
+  },
+  id: number
+}
+
+type Props = StateProps & DispatchProps & ParentProps;
 
 class PokemonCardPure extends React.Component <Props> {
 
   handleButtonClick(id: number) {
-    const {getData} = this.props;
-    getData(id);
+    this.props.getData(id);
   }
 
-  checkFavorite = (id) => {
-    const { favorites } = this.props;
+  checkFavorite = (id: number) => {
+    const favorites  = this.props.pokemon.favorites;
     let idArray = [];
     favorites.forEach(elem => {
       idArray.push(elem.id);
     })
-    if (idArray.indexOf(id) !== -1) {
-      return true;
-    } else {
-      return false;
-    }
+    return idArray.indexOf(id) !== -1;
   }
 
   render() {
-    const {pokemon, id} = this.props;
-    let isFavorite = this.checkFavorite(id);
+    const pokemonParent = this.props.pokemonParent;
+    const id = this.props.id;
+    const isFavorite = this.checkFavorite(id);
     return (
             <Wrapper onClick={() => this.handleButtonClick(id)}>
                 <PokemonCardContent>
@@ -48,22 +49,22 @@ class PokemonCardPure extends React.Component <Props> {
                       <img src={`/img/${id}.png`} />
                   </PokemonImageWrapper>
                   <PokemonName>
-                      {pokemon.name}
+                      {pokemonParent.name}
                   </PokemonName>
                   <PokemonStarWrapper>
                     {isFavorite && <img src={`/img/star-fav.png`} />}
                   </PokemonStarWrapper>
                 </PokemonCardContent>
             </Wrapper>
-    )
+          )
     }
 
 }
 
-function mapStateToProps(state: {pokemon: { favorites: Array<Pokemon> }}) {
-  const { favorites } = state.pokemon;
+function mapStateToProps(state: StateProps) {
+  const pokemon = state.pokemon;
   return {
-    favorites
+    pokemon
   }
 };
 

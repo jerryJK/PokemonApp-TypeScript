@@ -1,7 +1,6 @@
 import * as React from 'react';
 import  ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
 import { SearchBar } from  '../SearchBar/SearchBar';
 import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
 import { PokemonList } from '../PokemonList/PokemonList';
@@ -10,8 +9,10 @@ import { Wrapper, Header, Title, Logo, LoadingWrapper, Nav, NavItemFavorites, Na
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  isLoading: boolean,
-  selectedPokemon: Pokemon
+  pokemon: {
+    isLoading: boolean,
+    selectedPokemon: Pokemon
+  }
 }
 
 type DispatchProps = {
@@ -23,7 +24,8 @@ type Props = StateProps & DispatchProps;
 class AppPure extends React.Component <Props> {
 
   render() {
-    const {isLoading, selectedPokemon } = this.props;
+    const isLoading = this.props.pokemon.isLoading;
+    const selectedPokemon = this.props.pokemon.selectedPokemon
 
     return (
       <Wrapper>
@@ -54,11 +56,10 @@ class AppPure extends React.Component <Props> {
   }
 }
 
-function mapStateToProps(state: {pokemon: {isLoading: boolean, selectedPokemon: Pokemon }}) {
-    const { isLoading, selectedPokemon } = state.pokemon;
+function mapStateToProps(state: StateProps) {
+    const pokemon = state.pokemon;
     return {
-        isLoading,
-        selectedPokemon
+        pokemon
     }
 };
 
