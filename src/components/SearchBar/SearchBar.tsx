@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { Wrapper, Form, FormContentWrapper, FormInput, SubmitButton } from './SearchBar.s';
 
-type Props = {
-  getData: (id: number) => object
+type DispatchProps = {
+  getData: (id: number | string) => void
 }
 
 type State = {
   term: string
 }
+
+type Props = DispatchProps;
 
 class SearchBarPure extends React.Component<Props, State> {
 
@@ -30,7 +32,7 @@ class SearchBarPure extends React.Component<Props, State> {
   onFormSubmit = (event: any): void => {
     event.preventDefault();
     const getData = this.props.getData;
-    getData(Number(this.state.term));
+    getData(this.state.term);
     this.setState({
       term: ''
     })
@@ -58,4 +60,8 @@ class SearchBarPure extends React.Component<Props, State> {
 
 }
 
-export const SearchBar = connect(null, {getData})(SearchBarPure);
+const mapDispatchToProps = dispatch => ({
+  getData: (id) => dispatch(getData(id)),
+})
+
+export const SearchBar = connect(null, mapDispatchToProps)(SearchBarPure);
