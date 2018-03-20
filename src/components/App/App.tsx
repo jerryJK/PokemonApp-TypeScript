@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { SearchBar } from  '../SearchBar/SearchBar';
 import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
 import { PokemonList } from '../PokemonList/PokemonList';
-import { getData } from '../../actions';
 import { Wrapper, Header, Title, Logo, LoadingWrapper, Nav, NavItemFavorites, NavLink } from './App.s';
 import { Pokemon }  from '../../model/Pokemon';
 
@@ -15,11 +14,7 @@ type StateProps = {
   }
 }
 
-type DispatchProps = {
-  getData: (id: number) => object
-}
-
-type Props = StateProps & DispatchProps;
+type Props = StateProps;
 
 class AppPure extends React.Component <Props> {
 
@@ -56,11 +51,11 @@ class AppPure extends React.Component <Props> {
   }
 }
 
-function mapStateToProps(state: StateProps) {
+const mapStateToProps = (state: StateProps) => {
     const pokemon = state.pokemon;
     return {
         pokemon
     }
 };
 
-export const App = connect(mapStateToProps, {getData})(AppPure);
+export const App = connect(mapStateToProps, {})(AppPure);

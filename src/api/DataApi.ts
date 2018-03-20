@@ -5,8 +5,8 @@ class DataApiPure {
     urlPokemon: string;
 
     constructor() {
-        this.urlPokemonAll = 'http://pokeapi.co/api/v2/pokemon?limit=100';
-        this.urlPokemon = 'http://pokeapi.co/api/v2/pokemon/'
+        this.urlPokemonAll = 'http://pokeapi.salestock.net/api/v2/pokemon?limit=100';
+        this.urlPokemon = 'http://pokeapi.salestock.net/api/v2/pokemon/'
     }
 
     getPokemonAll = () => {

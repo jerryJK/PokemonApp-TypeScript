@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { getData } from '../../actions';
 import { FavoritePokemonCard } from '../FavoritePokemonCard/FavoritePokemonCard';
 import { Wrapper } from './FavoritesPokemonsList.s';
 import { Pokemon }  from '../../model/Pokemon';
@@ -30,7 +29,7 @@ class FavoritesPokemonsListPure extends React.Component <Props> {
 
 }
 
-function mapStateToProps(state: StateProps) {
+const mapStateToProps = (state: StateProps) => {
   const pokemon = state.pokemon;
   return {
     pokemon

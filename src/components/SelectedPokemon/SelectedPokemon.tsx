@@ -11,10 +11,7 @@ type StateProps = {
 }
 
 type DispatchProps = {
-  addToFavorites: (obj: Pokemon) => {
-    type: 'ADD_TO_FAVORITES',
-    payload: Pokemon
-  }
+  addToFavorites: (pokemon: Pokemon) => void
 }
 
 type ParentProps = {
@@ -76,4 +73,8 @@ function mapStateToProps(state: StateProps) {
   }
 };
 
-export const SelectedPokemon = connect(mapStateToProps, {addToFavorites})(SelectedPokemonPure);
+const mapDispatchToProps = dispatch => ({
+  addToFavorites: (pokemon) => dispatch(addToFavorites(pokemon)),
+})
+
+export const SelectedPokemon = connect(mapStateToProps, mapDispatchToProps)(SelectedPokemonPure);

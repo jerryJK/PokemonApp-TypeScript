@@ -24,34 +24,7 @@ export const deleteFavPokemon = createAction(DELETE_FAV_POKEMON,
     payload => payload
 );
 
-// export function getPokemon(data: object) {
-//   return {
-//     type: GET_POKEMON,
-//     payload: data
-//   };
-// }
-//
-// export function getDataDone(data: object[]) {
-//   return {
-//     type: GET_DATA_DONE,
-//     payload: data
-//   };
-// }
-//
-// export function getDataRequested() {
-//   return {
-//     type: GET_DATA_REQUESTED
-//   };
-// }
-//
-// export function getDataFailed(error: object) {
-//   return {
-//     type: GET_DATA_FAILED,
-//     payload: error
-//   };
-// }
-
-export function getData(id: number): object {
+export const getData = (id?: number | string): any => {
   return (dispatch: any) => {
     const api = new DataApi();
     if (id) {

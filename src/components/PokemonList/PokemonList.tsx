@@ -12,7 +12,7 @@ type StateProps = {
 }
 
 type DispatchProps = {
-  getData: () => object
+  getData: () => void
 }
 
 type Props = StateProps & DispatchProps;
@@ -39,11 +39,15 @@ class PokemonListPure extends React.Component <Props> {
 
 }
 
-function mapStateToProps(state: StateProps) {
+const mapStateToProps = (state: StateProps) => {
   const pokemon = state.pokemon;
   return {
     pokemon
   }
 };
 
-export const PokemonList = connect(mapStateToProps, {getData})(PokemonListPure);
+const mapDispatchToProps = dispatch => ({
+  getData: () => dispatch(getData()),
+})
+
+export const PokemonList = connect(mapStateToProps, mapDispatchToProps)(PokemonListPure);

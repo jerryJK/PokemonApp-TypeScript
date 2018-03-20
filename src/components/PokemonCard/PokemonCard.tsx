@@ -11,17 +11,17 @@ type StateProps = {
 }
 
 type DispatchProps = {
-  getData: (id: number) => object
+  getData: (id: number) => void
 }
 
-type ParentProps = {
+type OwnProps = {
   pokemonParent: {
     name: string
   },
   id: number
 }
 
-type Props = StateProps & DispatchProps & ParentProps;
+type Props = StateProps & DispatchProps & OwnProps;
 
 class PokemonCardPure extends React.Component <Props> {
 
@@ -61,11 +61,15 @@ class PokemonCardPure extends React.Component <Props> {
 
 }
 
-function mapStateToProps(state: StateProps) {
+const mapStateToProps = (state: StateProps) => {
   const pokemon = state.pokemon;
   return {
     pokemon
   }
 };
 
-export const PokemonCard = connect(mapStateToProps, {getData})(PokemonCardPure);
+const mapDispatchToProps = dispatch => ({
+  getData: (id) => dispatch(getData(id)),
+})
+
+export const PokemonCard = connect(mapStateToProps, mapDispatchToProps)(PokemonCardPure);

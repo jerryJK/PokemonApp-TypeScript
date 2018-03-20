@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { deleteFavPokemon } from '../../actions';
 import { Wrapper, FavoritePokemonCardContent, PokemonImageWrapper, PokemonName, DeleteButtonWrapper, Image } from './FavoritePokemonCard.s';
 
-type ParentProps = {
+type OwnProps = {
   pokemon: {
     name: string,
     id: number
@@ -11,13 +11,10 @@ type ParentProps = {
 }
 
 type DispatchProps = {
-  deleteFavPokemon: (id: number) => {
-    type: 'DELETE_FAV_POKEMON',
-    payload: number
-  }
+  deleteFavPokemon: (id: number) => void
 }
 
-type Props = ParentProps & DispatchProps;
+type Props = OwnProps & DispatchProps;
 
 class FavoritePokemonCardPure extends React.Component <Props> {
 
@@ -46,4 +43,8 @@ class FavoritePokemonCardPure extends React.Component <Props> {
 
 }
 
-export const FavoritePokemonCard = connect(null, {deleteFavPokemon})(FavoritePokemonCardPure);
+const mapDispatchToProps = dispatch => ({
+  deleteFavPokemon: (id) => dispatch(deleteFavPokemon(id)),
+})
+
+export const FavoritePokemonCard = connect(null, mapDispatchToProps)(FavoritePokemonCardPure);
