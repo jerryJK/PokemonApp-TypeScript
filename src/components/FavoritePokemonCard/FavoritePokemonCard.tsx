@@ -19,7 +19,7 @@ type Props = OwnProps & DispatchProps;
 class FavoritePokemonCardPure extends React.Component <Props> {
 
   handleDeleteButtonClick = (id: number) => {
-    this.props.deleteFavPokemon(id);
+     this.props.deleteFavPokemon(id);
   }
 
   render() {
@@ -33,8 +33,8 @@ class FavoritePokemonCardPure extends React.Component <Props> {
                   <PokemonName>
                       {pokemon.name}
                   </PokemonName>
-                  <DeleteButtonWrapper onClick={() => this.handleDeleteButtonClick(pokemon.id)}>
-                    <Image src={`/img/x-button.png`} />
+                  <DeleteButtonWrapper>
+                    <Image onClick={() => this.handleDeleteButtonClick(pokemon.id)} src={`/img/x-button.png`} />
                   </DeleteButtonWrapper>
                 </FavoritePokemonCardContent>
             </Wrapper>

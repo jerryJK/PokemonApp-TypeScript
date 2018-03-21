@@ -6,9 +6,8 @@ import { Wrapper } from './PokemonList.s';
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  pokemon: {
-    pokemonList: Array<Pokemon>
-  }
+  pokemonList: Array<Pokemon>,
+  selectedPokemon: Pokemon
 }
 
 type DispatchProps = {
@@ -24,26 +23,31 @@ class PokemonListPure extends React.Component <Props> {
   }
 
   render() {
-      const pokemonList = this.props.pokemon.pokemonList;
+      const pokemonList = this.props.pokemonList;
 
       return (
         <Wrapper>
-          {pokemonList.map((pokemon: {name: string}, index: number) => {
+          {
+            pokemonList.map((pokemon, index) => {
               return (
                 <PokemonCard key={pokemon.name} id={index + 1} pokemonParent={pokemon} />
               )
-          })}
+            })
+          }
         </Wrapper>
       );
     }
 
 }
 
-const mapStateToProps = (state: StateProps) => {
-  const pokemon = state.pokemon;
-  return {
-    pokemon
-  }
+const mapStateToProps = (state: StateProps ) => {
+  const pokemonList = state.pokemonList;
+  const selectedPokemon = state.selectedPokemon;
+
+    return {
+        pokemonList,
+        selectedPokemon,
+    }
 };
 
 const mapDispatchToProps = dispatch => ({

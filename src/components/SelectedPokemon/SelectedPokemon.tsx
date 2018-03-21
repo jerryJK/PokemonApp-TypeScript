@@ -5,20 +5,18 @@ import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonS
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  pokemon: {
-    favorites: Array<Pokemon>
-  }
+  favoritesPokemons: Array<Pokemon>
 }
 
 type DispatchProps = {
   addToFavorites: (pokemon: Pokemon) => void
 }
 
-type ParentProps = {
+type OwnProps = {
   selectedPokemon: Pokemon
 }
 
-type Props = StateProps & DispatchProps & ParentProps;
+type Props = StateProps & DispatchProps & OwnProps;
 
 class SelectedPokemonPure extends React.Component<Props> {
 
@@ -30,7 +28,7 @@ class SelectedPokemonPure extends React.Component<Props> {
   }
 
   checkFavorite = (id) => {
-    const favorites = this.props.pokemon.favorites;
+    const favorites = Array.from(this.props.favoritesPokemons);
     let idArray = [];
     favorites.forEach(elem => {
       idArray.push(elem.id);
@@ -66,11 +64,11 @@ class SelectedPokemonPure extends React.Component<Props> {
   }
 }
 
-function mapStateToProps(state: StateProps) {
-  const pokemon = state.pokemon;
-  return {
-    pokemon
-  }
+const mapStateToProps = (state: StateProps ) => {
+  const favoritesPokemons = state.favoritesPokemons;
+    return {
+        favoritesPokemons
+    }
 };
 
 const mapDispatchToProps = dispatch => ({

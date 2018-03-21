@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 import { SearchBar } from  '../SearchBar/SearchBar';
 import { SelectedPokemon }  from '../SelectedPokemon/SelectedPokemon';
 import { PokemonList } from '../PokemonList/PokemonList';
-import { Wrapper, Header, Title, Logo, LoadingWrapper, Nav, NavItemFavorites, NavLink } from './App.s';
+import { Wrapper, Header, Title, Logo, Nav, NavItemFavorites, NavLink, LoadingWrapper } from './App.s';
 import { Pokemon }  from '../../model/Pokemon';
 
 type StateProps = {
-  pokemon: {
-    isLoading: boolean,
-    selectedPokemon: Pokemon
-  }
+    selectedPokemon: Pokemon,
+    isLoading: boolean
 }
 
 type Props = StateProps;
@@ -19,8 +17,8 @@ type Props = StateProps;
 class AppPure extends React.Component <Props> {
 
   render() {
-    const isLoading = this.props.pokemon.isLoading;
-    const selectedPokemon = this.props.pokemon.selectedPokemon
+    const selectedPokemon = this.props.selectedPokemon;
+    const isLoading = this.props.isLoading;
 
     return (
       <Wrapper>
@@ -51,10 +49,13 @@ class AppPure extends React.Component <Props> {
   }
 }
 
-const mapStateToProps = (state: StateProps) => {
-    const pokemon = state.pokemon;
+const mapStateToProps = (state: StateProps ) => {
+    const selectedPokemon = state.selectedPokemon;
+    const isLoading = state.isLoading;
+
     return {
-        pokemon
+        selectedPokemon,
+        isLoading
     }
 };
 

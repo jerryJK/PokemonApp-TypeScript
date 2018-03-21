@@ -23,7 +23,6 @@ class SearchBarPure extends React.Component<Props, State> {
   }
 
   onInputChange = (event: any): void => {
-    // console.log(event.target.value);
       this.setState({
         term: event.target.value
       })
@@ -36,7 +35,6 @@ class SearchBarPure extends React.Component<Props, State> {
     this.setState({
       term: ''
     })
-    // console.log(this.state.term);
   }
 
   render() {
