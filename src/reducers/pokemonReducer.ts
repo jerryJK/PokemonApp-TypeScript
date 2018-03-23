@@ -9,6 +9,14 @@ type isLoading = boolean;
 type selectedPokemon = Pokemon | null;
 type favoritesPokemons = Array<Pokemon>
 
+const initialState = {
+    pokemonList: [],
+    isLoading: false,
+    isError: false,
+    selectedPokemon: null,
+    favoritesPokemons: []
+}
+
 const updateFavorites = (favorites, id) => {
     let newFavorites = favorites.filter(elem => {
         return (
@@ -48,27 +56,27 @@ const deleteFavPokemon = (state, action) => {
 
 const pokemonList = handleActions<pokemonList, any> ({
   [GET_DATA_DONE]: getPokemonList
-}, [])
+}, initialState.pokemonList)
 
 const isLoading = handleActions<isLoading, any> ({
   [GET_DATA_REQUESTED]: setLoadingTrue,
   [GET_DATA_DONE]: setLoadingFalse,
   [GET_DATA_FAILED]: setLoadingFalse,
   [GET_POKEMON]: setLoadingFalse
-}, false)
+}, initialState.isLoading)
 
-const isError = handleActions<isLoading, any> ({
+const isError = handleActions<isError, any> ({
   [GET_DATA_FAILED]: setErrorTrue,
-}, false)
+}, initialState.isError)
 
 const selectedPokemon = handleActions<selectedPokemon, any> ({
   [GET_POKEMON]: getPokemon
-}, null);
+}, initialState.selectedPokemon);
 
-export const favoritesPokemons = handleActions<favoritesPokemons, any> ({
+const favoritesPokemons = handleActions<favoritesPokemons, any> ({
   [ADD_TO_FAVORITES]: addToFavorites,
   [DELETE_FAV_POKEMON]: deleteFavPokemon
-}, []);
+}, initialState.favoritesPokemons);
 
 export const pokemon = combineReducers({
     isLoading,
