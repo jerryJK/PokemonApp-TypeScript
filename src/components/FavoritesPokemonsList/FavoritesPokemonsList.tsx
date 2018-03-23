@@ -27,12 +27,8 @@ class FavoritesPokemonsListPure extends React.Component <Props> {
 
 }
 
-const mapStateToProps = (state: StateProps ) => {
-  const favoritesPokemons = state.favoritesPokemons;
-
-    return {
-        favoritesPokemons
-    }
-};
+const mapStateToProps = (state): StateProps => ({
+    favoritesPokemons: state.pokemon.favoritesPokemons
+});
 
 export const FavoritesPokemonsList = connect(mapStateToProps, {})(FavoritesPokemonsListPure);

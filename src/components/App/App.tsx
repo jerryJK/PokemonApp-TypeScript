@@ -49,14 +49,9 @@ class AppPure extends React.Component <Props> {
   }
 }
 
-const mapStateToProps = (state: StateProps ) => {
-    const selectedPokemon = state.selectedPokemon;
-    const isLoading = state.isLoading;
-
-    return {
-        selectedPokemon,
-        isLoading
-    }
-};
+const mapStateToProps = (state): StateProps => ({
+    selectedPokemon: state.pokemon.selectedPokemon,
+    isLoading: state.pokemon.isLoading
+});
 
 export const App = connect(mapStateToProps, {})(AppPure);

@@ -29,10 +29,7 @@ class PokemonCardPure extends React.Component <Props> {
 
   checkFavorite = (id: number) => {
     const favorites  = this.props.favoritesPokemons;
-    let idArray = [];
-    favorites.forEach(elem => {
-      idArray.push(elem.id);
-    })
+    let idArray = favorites.map(favorite => favorite.id);
     return idArray.indexOf(id) !== -1;
   }
 
@@ -60,13 +57,9 @@ class PokemonCardPure extends React.Component <Props> {
 
 }
 
-const mapStateToProps = (state: StateProps ) => {
-  const favoritesPokemons = state.favoritesPokemons;
-
-    return {
-        favoritesPokemons
-    }
-};
+const mapStateToProps = (state): StateProps => ({
+    favoritesPokemons: state.pokemon.favoritesPokemons
+});
 
 const mapDispatchToProps = dispatch => ({
   getData: (id) => dispatch(getData(id))
