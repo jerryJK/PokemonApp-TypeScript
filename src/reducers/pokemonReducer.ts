@@ -1,82 +1,79 @@
-import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON, ADD_TO_FAVORITES, DELETE_FAV_POKEMON } from '../constants';
+import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON, DELETE_FAV_POKEMON, ADD_TO_FAVORITES } from '../constants';
 import { handleActions } from 'redux-actions';
 import { Pokemon } from '../model/Pokemon';
+import { combineReducers } from 'redux';
 
-type State = {
-    isLoading: boolean,
-    isError: boolean,
-    pokemonList: Array<Pokemon>,
-    selectedPokemon: Pokemon | null,
-    favoritesPokemons: Array<Pokemon>
+type pokemonList = Array<Pokemon>;
+type isError = boolean;
+type isLoading = boolean;
+type selectedPokemon = Pokemon | null;
+type favoritesPokemons = Array<Pokemon>
+
+const updateFavorites = (favorites, id) => {
+    let newFavorites = favorites.filter(elem => {
+        return (
+            elem.id !== id
+        )
+    });
+    return newFavorites;
 };
 
-const initialState = {
-    isLoading: false,
-    isError: false,
-    pokemonList: [],
-    selectedPokemon: null,
-    favoritesPokemons: []
+const getPokemonList = (state, action) => {
+   return action.payload.results
 };
 
- const deletePokemonFav = (favorites, id) => {
-     let newFavorites = favorites.filter(elem => {
-         return (
-             elem.id !== id
-         )
-     });
-     return newFavorites;
- };
+const setLoadingTrue = (state, action) => {
+   return true;
+};
 
- const getDataDone = (state, action) => {
-   return {
-     ...state,
-     pokemonList: action.payload.results,
-     isLoading: false
-   };
- };
+const setLoadingFalse = (state, action) => {
+   return false;
+};
 
- const getDataRequested = (state, action) => {
-   return {
-     ...state,
-     isLoading: true
-   };
- };
+const setErrorTrue = (state, action) => {
+   return true;
+};
 
- const getDataFailed = (state, action) => {
-   return {
-     ...state,
-     isLoading: false,
-     isError: true
-   };
- };
+const getPokemon = (state, action) => {
+   return action.payload;
+};
 
- const getPokemon = (state, action) => {
-   return {
-     ...state,
-     selectedPokemon: action.payload,
-     isLoading: false
-   };
- };
+const addToFavorites = (state, action) => {
+   return [...state, action.payload ]
+};
 
- const addToFavorites = (state, action) => {
-   return {
-     ...state,
-     favoritesPokemons: [ ...state.favoritesPokemons, action.payload]
-   };
- };
+const deleteFavPokemon = (state, action) => {
+   return updateFavorites(state, action.payload)
+};
 
- const deleteFavPokemon = (state, action) => {
-   return {
-     ...state,
-     favoritesPokemons: deletePokemonFav(state.favoritesPokemons, action.payload)
-   };
- };
+const pokemonList = handleActions<pokemonList, any> ({
+  [GET_DATA_DONE]: getPokemonList
+}, [])
 
-export const pokemon = handleActions<State, any> ({
-  [GET_DATA_DONE]: getDataDone,
-  [GET_DATA_REQUESTED]: getDataRequested,
-  [GET_DATA_FAILED]: getDataFailed,
-  [GET_POKEMON]: getPokemon,
+const isLoading = handleActions<isLoading, any> ({
+  [GET_DATA_REQUESTED]: setLoadingTrue,
+  [GET_DATA_DONE]: setLoadingFalse,
+  [GET_DATA_FAILED]: setLoadingFalse,
+  [GET_POKEMON]: setLoadingFalse
+}, false)
+
+const isError = handleActions<isLoading, any> ({
+  [GET_DATA_FAILED]: setErrorTrue,
+}, false)
+
+const selectedPokemon = handleActions<selectedPokemon, any> ({
+  [GET_POKEMON]: getPokemon
+}, null);
+
+export const favoritesPokemons = handleActions<favoritesPokemons, any> ({
   [ADD_TO_FAVORITES]: addToFavorites,
   [DELETE_FAV_POKEMON]: deleteFavPokemon
-}, initialState);
+}, []);
+
+export const pokemon = combineReducers({
+    isLoading,
+    isError,
+    pokemonList,
+    selectedPokemon,
+    favoritesPokemons
+})
