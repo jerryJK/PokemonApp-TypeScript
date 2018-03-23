@@ -1,1 +1,2 @@
-## Pokemon App with Typescript
+## Pokemon App
+Used technologies: TypeScript/React/Redux
