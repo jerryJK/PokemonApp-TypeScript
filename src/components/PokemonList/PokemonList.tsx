@@ -4,9 +4,10 @@ import { getData } from '../../actions';
 import { PokemonCard } from '../PokemonCard/PokemonCard';
 import { Wrapper } from './PokemonList.s';
 import { Pokemon }  from '../../model/Pokemon';
+import { getFilteredPokemons } from '../../selectors';
 
 type StateProps = {
-    pokemonList: Array<Pokemon>
+  pokemonList: Array<Pokemon>
 }
 
 type DispatchProps = {
@@ -41,11 +42,11 @@ class PokemonListPure extends React.Component <Props> {
 }
 
 const mapStateToProps = (state): StateProps => ({
-    pokemonList: state.pokemon.pokemonList
+  pokemonList: getFilteredPokemons(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  getData: () => dispatch(getData()),
+  getData: () => dispatch(getData())
 })
 
 export const PokemonList = connect(mapStateToProps, mapDispatchToProps)(PokemonListPure);

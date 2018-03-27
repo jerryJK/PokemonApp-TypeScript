@@ -23,6 +23,12 @@ export const PokemonName = glamorous.div({
     wrap: 'nowrap'
 });
 
+export const PokemonId = glamorous.div({
+    display: 'flex',
+    justifyContent: 'center',
+    wrap: 'nowrap'
+});
+
 export const DeleteButtonWrapper = glamorous.div({
     display: 'flex',
     justifyContent: 'flex-end'

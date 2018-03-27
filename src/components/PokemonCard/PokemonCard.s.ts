@@ -24,6 +24,12 @@ export const PokemonName = glamorous.div({
     wrap: 'nowrap'
 });
 
+export const PokemonId = glamorous.div({
+    display: 'flex',
+    justifyContent: 'center',
+    wrap: 'nowrap'
+});
+
 export const PokemonStarWrapper = glamorous.div({
     minHeight: '25px',
     display: 'flex',

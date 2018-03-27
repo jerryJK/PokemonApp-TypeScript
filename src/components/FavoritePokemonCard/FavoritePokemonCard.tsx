@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { deleteFavPokemon } from '../../actions';
-import { Wrapper, FavoritePokemonCardContent, PokemonImageWrapper, PokemonName, DeleteButtonWrapper, Image } from './FavoritePokemonCard.s';
+import { Wrapper, FavoritePokemonCardContent, PokemonImageWrapper, PokemonName, DeleteButtonWrapper, Image, PokemonId } from './FavoritePokemonCard.s';
 
 type OwnProps = {
   pokemon: {
@@ -33,6 +33,9 @@ class FavoritePokemonCardPure extends React.Component <Props> {
                   <PokemonName>
                       {pokemon.name}
                   </PokemonName>
+                  <PokemonId>
+                      {`id: ${pokemon.id}`}
+                  </PokemonId>
                   <DeleteButtonWrapper>
                     <Image onClick={() => this.handleDeleteButtonClick(pokemon.id)} src={`/img/x-button.png`} />
                   </DeleteButtonWrapper>

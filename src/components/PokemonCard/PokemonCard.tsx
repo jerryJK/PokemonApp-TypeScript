@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { getData } from '../../actions';
 import { Pokemon }  from '../../model/Pokemon';
-import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonStarWrapper } from './PokemonCard.s';
+import { Wrapper, PokemonCardContent, PokemonImageWrapper, PokemonName, PokemonStarWrapper, PokemonId } from './PokemonCard.s';
 
 type StateProps = {
   favoritesPokemons: Array<Pokemon>
@@ -46,6 +46,9 @@ class PokemonCardPure extends React.Component <Props> {
                   <PokemonName>
                       {pokemonParent.name}
                   </PokemonName>
+                  <PokemonId>
+                      {`id: ${pokemonParent.id}`}
+                  </PokemonId>
                   <PokemonStarWrapper>
                     {isFavorite && <img src={`/img/star-fav.png`} />}
                   </PokemonStarWrapper>
