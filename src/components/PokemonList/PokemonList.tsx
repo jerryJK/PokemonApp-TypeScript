@@ -23,13 +23,14 @@ class PokemonListPure extends React.Component <Props> {
 
   render() {
       const pokemonList = this.props.pokemonList;
+      console.log(pokemonList);
 
       return (
         <Wrapper>
           {
             pokemonList.map((pokemon, index) => {
               return (
-                <PokemonCard key={pokemon.name} id={index + 1} pokemonParent={pokemon} />
+                <PokemonCard key={pokemon.name} pokemonParent={pokemon} />
               )
             })
           }

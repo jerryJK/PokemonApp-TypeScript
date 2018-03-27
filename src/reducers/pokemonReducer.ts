@@ -27,7 +27,13 @@ const updateFavorites = (favorites, id) => {
 };
 
 const getPokemonList = (state, action) => {
-   return action.payload.results
+  let pokemonListWithId = action.payload.results.map((elem, i) => {
+      return {
+        ...elem,
+        id: i + 1
+      };
+  });
+  return pokemonListWithId
 };
 
 const setLoadingTrue = (state, action) => {

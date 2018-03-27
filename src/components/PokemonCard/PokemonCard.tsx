@@ -14,9 +14,9 @@ type DispatchProps = {
 
 type OwnProps = {
   pokemonParent: {
-    name: string
-  },
-  id: number
+    name: string,
+    id: number
+  }
 }
 
 type Props = StateProps & DispatchProps & OwnProps;
@@ -35,14 +35,13 @@ class PokemonCardPure extends React.Component <Props> {
 
   render() {
     const pokemonParent = this.props.pokemonParent;
-    const id = this.props.id;
-    const isFavorite = this.checkFavorite(id);
+    const isFavorite = this.checkFavorite(pokemonParent.id);
 
     return (
-            <Wrapper onClick={() => this.handleButtonClick(id)}>
+            <Wrapper onClick={() => this.handleButtonClick(pokemonParent.id)}>
                 <PokemonCardContent>
                   <PokemonImageWrapper>
-                      <img src={`/img/${id}.png`} />
+                      <img src={`/img/${pokemonParent.id}.png`} />
                   </PokemonImageWrapper>
                   <PokemonName>
                       {pokemonParent.name}
