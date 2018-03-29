@@ -1,4 +1,4 @@
-import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON, DELETE_FAV_POKEMON, ADD_TO_FAVORITES } from '../constants';
+import { GET_DATA_DONE, GET_DATA_REQUESTED, GET_DATA_FAILED, GET_POKEMON, DELETE_FAV_POKEMON, ADD_TO_FAVORITES, FILTER_POKEMON_LIST } from '../constants';
 import { handleActions } from 'redux-actions';
 import { Pokemon } from '../model/Pokemon';
 import { combineReducers } from 'redux';
@@ -7,14 +7,16 @@ type pokemonList = Array<Pokemon>;
 type isError = boolean;
 type isLoading = boolean;
 type selectedPokemon = Pokemon | null;
-type favoritesPokemons = Array<Pokemon>
+type favoritesPokemons = Array<Pokemon>;
+type visibilityFilter = string;
 
 const initialState = {
     pokemonList: [],
     isLoading: false,
     isError: false,
     selectedPokemon: null,
-    favoritesPokemons: []
+    favoritesPokemons: [],
+    visibilityFilter: ''
 }
 
 const updateFavorites = (favorites, id) => {
@@ -60,6 +62,10 @@ const deleteFavPokemon = (state, action) => {
    return updateFavorites(state, action.payload)
 };
 
+const filterPokemon = (state, action) => {
+   return action.payload;
+};
+
 const pokemonList = handleActions<pokemonList, any> ({
   [GET_DATA_DONE]: getPokemonList
 }, initialState.pokemonList)
@@ -84,10 +90,15 @@ const favoritesPokemons = handleActions<favoritesPokemons, any> ({
   [DELETE_FAV_POKEMON]: deleteFavPokemon
 }, initialState.favoritesPokemons);
 
+const visibilityFilter = handleActions<visibilityFilter, any> ({
+  [FILTER_POKEMON_LIST]: filterPokemon
+}, initialState.visibilityFilter);
+
 export const pokemon = combineReducers({
     isLoading,
     isError,
     pokemonList,
     selectedPokemon,
-    favoritesPokemons
+    favoritesPokemons,
+    visibilityFilter
 })
